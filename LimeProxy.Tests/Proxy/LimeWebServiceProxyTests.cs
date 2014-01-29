@@ -10,6 +10,7 @@ namespace LimeProxy.Tests.Proxy
     public class LimeWebServiceProxyTests
     {
         private ILimeWebSerivceClientInvoker limeWebSerivceClientInvoker;
+        private IValueTypeProvider valueTypeProvider = new ValueTypeProvider();
         private LimeWebServiceProxy proxy;
 
         [SetUp]
@@ -17,7 +18,7 @@ namespace LimeProxy.Tests.Proxy
         {
             limeWebSerivceClientInvoker = A.Fake<ILimeWebSerivceClientInvoker>();
 
-            proxy = new LimeWebServiceProxy(limeWebSerivceClientInvoker);
+            proxy = new LimeWebServiceProxy(limeWebSerivceClientInvoker, valueTypeProvider);
         }
 
         [Test]
@@ -49,7 +50,7 @@ namespace LimeProxy.Tests.Proxy
                 new XElement("parameter",
                     new XAttribute("name","@@Foo"),
                     new XAttribute("value", 12),
-                    new XAttribute("valuetype", 2)));
+                    new XAttribute("valuetype", 3)));
 
             proxy.ExecuteStoredProcedure(name, p);
 

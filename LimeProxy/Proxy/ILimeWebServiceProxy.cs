@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using LimeProxy.Models;
 
 namespace LimeProxy.Proxy
@@ -14,10 +12,13 @@ namespace LimeProxy.Proxy
     public class LimeWebServiceProxy : ILimeWebServiceProxy
     {
         private readonly ILimeWebSerivceClientInvoker _limeWebSerivceClientInvoker;
+        private readonly IValueTypeProvider _valueTypeProvider;
 
-        public LimeWebServiceProxy(ILimeWebSerivceClientInvoker limeWebSerivceClientInvoker)
+        public LimeWebServiceProxy(ILimeWebSerivceClientInvoker limeWebSerivceClientInvoker,
+            IValueTypeProvider valueTypeProvider)
         {
             _limeWebSerivceClientInvoker = limeWebSerivceClientInvoker;
+            _valueTypeProvider = valueTypeProvider;
         }
 
         public Result ExecuteStoredProcedure(string name, ProcedureParameters parameters)
@@ -41,11 +42,9 @@ namespace LimeProxy.Proxy
                 x.Add(new XElement("parameter",
                     new XAttribute("name", param.Name),
                     new XAttribute("value", param.Value),
-                    new XAttribute("valuetype", 2)));
+                    new XAttribute("valuetype", _valueTypeProvider.Get(param.Value))));
             }
             return x.ToString();
         }
     }
-
-    
 }
