@@ -165,5 +165,21 @@ namespace LimeProxy.Tests.Proxy
 
             Assert.That(result.Success, Is.False);
         }
+
+        [Test]
+        public void ShouldConvertResultFromWebServiceToJson()
+        {
+            var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
+            var name = "csp_some_proc";
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).
+                Returns(@"<?xml version=""1.0"" encoding=""UTF-16"" ?>
+<data>
+	<person name=""Karl Kula"" email=""karl.kula@fakeorg.se"" phone=""08-123 123""/>
+</data>");
+
+            var result = proxy.ExecuteStoredProcedure(name, p);
+
+            Assert.That(result.Data, Is.StringStarting("{\"data\":{"));
+        }
     }
 }

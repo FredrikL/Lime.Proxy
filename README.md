@@ -7,5 +7,5 @@ Proxy for Lime Pro WebService by lundalogik that allows clientside javascript to
 
 ## Limitations
 * Expected input is json and only return type is json
-* No security what so ever
+* *No security what so ever*
 * All changes needs to be done with stored procedures

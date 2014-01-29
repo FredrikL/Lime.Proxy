@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Xml;
 using System.Xml.Linq;
 using LimeProxy.Models;
+using Newtonsoft.Json;
 
 namespace LimeProxy.Proxy
 {
@@ -28,8 +30,12 @@ namespace LimeProxy.Proxy
             {
                 var xml = BuildProcedureXml(name, parameters);
                 var result = _limeWebSerivceClientInvoker.ExecuteProcedure(xml);
-
-                return new Result() {Success = true};
+                var json = ConvertFromXmlStringToJsonString(result);
+                return new Result()
+                {
+                    Success = true,
+                    Data = json
+                };
             }
             catch (Exception ex)
             {
@@ -56,6 +62,14 @@ namespace LimeProxy.Proxy
                     new XAttribute("valuetype", _valueTypeProvider.Get(param.Value))));
             }
             return x.ToString();
+        }
+
+        private string ConvertFromXmlStringToJsonString(string xml)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+            string jsonText = JsonConvert.SerializeXmlNode(doc.SelectSingleNode("/data"));
+            return jsonText;
         }
     }
 }
