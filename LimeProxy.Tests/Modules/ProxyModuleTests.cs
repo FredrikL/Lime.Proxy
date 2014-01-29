@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FakeItEasy;
 using LimeProxy.Models;
 using LimeProxy.Modules;
@@ -51,21 +52,6 @@ namespace LimeProxy.Tests.Modules
         }
 
         [Test]
-        public void ShouldPickTableToQueryFromUrl()
-        {
-            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
-
-            var result = browser.Post("/v1/table/customer", with =>
-            {
-                with.HttpRequest();
-                with.Header("accept", "application/json");
-                with.Header("Content-Type", "application/json");
-            });
-
-            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>._)).MustHaveHappened();
-        }
-
-        [Test]
         public void ShouldBindProcedureParameters()
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
@@ -83,5 +69,48 @@ namespace LimeProxy.Tests.Modules
             A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure(A<string>._, 
                 A<ProcedureParameters>.That.Matches(p => p.Parameters.First().Name == "foo"))).MustHaveHappened();
         }
+
+        [Test]
+        public void ShouldPickTableToQueryFromUrl()
+        {
+            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
+
+            var result = browser.Post("/v1/table/customer", with =>
+            {
+                with.HttpRequest();
+                with.Header("accept", "application/json");
+                with.Header("Content-Type", "application/json");
+            });
+
+            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>._)).MustHaveHappened();
+        }
+
+        [Test]
+        public void ShouldBindTableQueryParameters()
+        {
+            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
+
+            var result = browser.Post("/v1/table/customer", with =>
+            {
+                with.HttpRequest();
+                with.Header("accept", "application/json");
+                with.Header("Content-Type", "application/json");
+                with.Body(@"{
+    'Fields': ['foo','bar'],
+    'Conditions': [{'Field': 'idfoo', 'Operator':'>=', 'Value':1001 }]
+}");
+            });
+
+            Func<TableQuery, bool> matcher = query =>
+            {
+                Assert.That(query.Fields.Count(), Is.EqualTo(2));
+                Assert.That(query.Conditions.Count(), Is.EqualTo(1));
+                return true;
+            };
+
+            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>.That.Matches(matcher, ""))).MustHaveHappened();
+        }
+
+
     }
 }
