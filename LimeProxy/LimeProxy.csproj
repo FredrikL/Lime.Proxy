@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,7 +65,14 @@
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\TableQuery.cs" />
     <Compile Include="Modules\ProxyModule.cs" />
+    <Compile Include="Proxy\ILimeWebSerivceClientInvoker.cs" />
     <Compile Include="Proxy\ILimeWebServiceProxy.cs" />
+    <Compile Include="Proxy\LimeWebServiceClientInvoker.cs" />
+    <Compile Include="Service References\LimeWs\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -76,8 +85,42 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Service References\LimeWs\DataService.wsdl" />
+    <None Include="Service References\LimeWs\LimeProxy.LimeWs.ExecuteProcedureForSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LimeWs\LimeProxy.LimeWs.ExecuteProcedureResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LimeWs\meta.wsdl" />
+    <None Include="Service References\LimeWs\meta.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LimeWs\meta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LimeWs\meta2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\LimeWs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LimeWs\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LimeWs\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\LimeWs\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

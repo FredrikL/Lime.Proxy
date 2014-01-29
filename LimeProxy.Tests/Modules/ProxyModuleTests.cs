@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace LimeProxy.Tests.Modules
 {
+    [TestFixture]
     public class ProxyModuleTests
     {
         private ILimeWebServiceProxy limeWebServiceProxy;

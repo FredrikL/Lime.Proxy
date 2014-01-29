@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Modules\ProxyModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy\LimeWebServiceProxyTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
