@@ -57,7 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Condition.cs" />
+    <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\ProcedureParameters.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\TableQuery.cs" />
     <Compile Include="Modules\ProxyModule.cs" />
     <Compile Include="Proxy\ILimeWebServiceProxy.cs" />
     <Compile Include="Service1.cs">

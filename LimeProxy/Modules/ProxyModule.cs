@@ -1,5 +1,7 @@
-﻿using LimeProxy.Proxy;
+﻿using LimeProxy.Models;
+using LimeProxy.Proxy;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace LimeProxy.Modules
 {
@@ -10,9 +12,17 @@ namespace LimeProxy.Modules
         public ProxyModule(ILimeWebServiceProxy limeWebServiceProxy) : base("/v1")
         {
             _limeWebServiceProxy = limeWebServiceProxy;
-            Post["/sp/{name}"] = x => _limeWebServiceProxy.ExecuteStoredProcedure(x.name, null);
+            Post["/sp/{name}"] = x =>
+            {
+                var param = this.Bind<ProcedureParameters>();
+                return _limeWebServiceProxy.ExecuteStoredProcedure(x.name, param);
+            };
 
-            Post["/table/{name}"] = x => _limeWebServiceProxy.QueryTable(x.name, null);
+            Post["/table/{name}"] = x =>
+            {
+                var param = this.Bind<TableQuery>();
+                return _limeWebServiceProxy.QueryTable(x.name, param);
+            };
 
             After += ctx => ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
         }

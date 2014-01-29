@@ -1,4 +1,6 @@
-﻿using FakeItEasy;
+﻿using System.Linq;
+using FakeItEasy;
+using LimeProxy.Models;
 using LimeProxy.Modules;
 using LimeProxy.Proxy;
 using Nancy.Testing;
@@ -45,7 +47,7 @@ namespace LimeProxy.Tests.Modules
                 with.Header("Content-Type", "application/json");
             });
 
-            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("some_sp", A<object>._)).MustHaveHappened();
+            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("some_sp", A<ProcedureParameters>._)).MustHaveHappened();
         }
 
         [Test]
@@ -60,7 +62,26 @@ namespace LimeProxy.Tests.Modules
                 with.Header("Content-Type", "application/json");
             });
 
-            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<object>._)).MustHaveHappened();
+            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>._)).MustHaveHappened();
+        }
+
+        [Test]
+        public void ShouldBindProcedureParameters()
+        {
+            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
+
+            var result = browser.Post("/v1/sp/some_sp", with =>
+            {
+                with.HttpRequest();
+                with.Header("accept", "application/json");
+                with.Header("Content-Type", "application/json");
+                with.Body(@"{
+    Parameters: [{'Name': 'foo','Value':12}]
+}");
+            });
+
+            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure(A<string>._, 
+                A<ProcedureParameters>.That.Matches(p => p.Parameters.First().Name == "foo"))).MustHaveHappened();
         }
     }
 }
