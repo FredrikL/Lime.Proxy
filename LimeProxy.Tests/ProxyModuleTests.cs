@@ -6,14 +6,16 @@ namespace LimeProxy.Tests
 {
     public class ProxyModuleTests
     {
-        [Test]
-        public void VersionTests()
+        [TestCase("/v1/sp/foo")]
+        [TestCase("/v1/table/bar")]
+        public void ShouldSetCORSHeaderInResponse(string url)
         {
             var browser = new Browser(w => w.Module<ProxyModule>());
 
-            var result = browser.Get("/Api/Version", with => with.HttpRequest());
-            
-            Assert.That(result.Body.AsString(), Is.EqualTo("1"));
+            var result = browser.Post(url, with => with.HttpRequest());
+
+            Assert.That(result.Headers.ContainsKey("Access-Control-Allow-Origin"), Is.True);
+            Assert.That(result.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
         }
     }
 }
