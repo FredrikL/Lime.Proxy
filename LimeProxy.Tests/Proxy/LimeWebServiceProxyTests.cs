@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 using FakeItEasy;
 using LimeProxy.Models;
@@ -139,6 +140,30 @@ namespace LimeProxy.Tests.Proxy
             proxy.ExecuteStoredProcedure(name, p);
 
             A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(expected.ToString())).MustHaveHappened();
+        }
+
+        [Test]
+        public void ShouldSetSuccessAsTrueIfNoError()
+        {
+            var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
+            var name = "csp_some_proc";
+
+            var result = proxy.ExecuteStoredProcedure(name, p);
+
+            Assert.That(result.Success, Is.True);
+        }
+
+        [Test]
+        public void ShouldSetSuccessAsFalseIfErrorIsThrown()
+        {
+            var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
+            var name = "csp_some_proc";
+
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).Throws<Exception>();
+
+            var result = proxy.ExecuteStoredProcedure(name, p);
+
+            Assert.That(result.Success, Is.False);
         }
     }
 }

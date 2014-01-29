@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using LimeProxy.Models;
 
 namespace LimeProxy.Proxy
@@ -23,10 +24,20 @@ namespace LimeProxy.Proxy
 
         public Result ExecuteStoredProcedure(string name, ProcedureParameters parameters)
         {
-            var xml = BuildProcedureXml(name, parameters);
-            var result = _limeWebSerivceClientInvoker.ExecuteProcedure(xml);
+            try
+            {
+                var xml = BuildProcedureXml(name, parameters);
+                var result = _limeWebSerivceClientInvoker.ExecuteProcedure(xml);
 
-            return new Result();
+                return new Result() {Success = true};
+            }
+            catch (Exception ex)
+            {
+                return new Result()
+                {
+                    Success = false
+                };
+            }
         }
 
         public Result QueryTable(string name, TableQuery parameters)
