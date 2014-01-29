@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://lundalogik.se/Tangelo/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://lundalogik.se/Tangelo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://lundalogik.se/Tangelo/Imports">
+      <xsd:import schemaLocation="http://localhost:23183/meta?xsd=xsd0" namespace="http://lundalogik.se/Tangelo/" />
+      <xsd:import schemaLocation="http://localhost:23183/meta?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" />
+      <xsd:import schemaLocation="http://localhost:23183/meta?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataService_ExecuteProcedure_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteProcedure" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedure_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteProcedureResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedure_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q1:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedure_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q2:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedureForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteProcedureForSession" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedureForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteProcedureForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedureForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q3:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ExecuteProcedureForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q4:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiles" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFiles_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q5:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFiles_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q6:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFilesForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilesForSession" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFilesForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFilesForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFilesForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q7:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFilesForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q8:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetXmlQueryData" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetXmlQueryDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryData_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q9:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryData_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q10:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryDataForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetXmlQueryDataForSession" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryDataForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetXmlQueryDataForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryDataForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q11:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetXmlQueryDataForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q12:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateData" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateData_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q13:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateData_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q14:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateDataForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDataForSession" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateDataForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDataForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateDataForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q15:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateDataForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q16:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchema_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDatabaseSchema" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDatabaseSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchema_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q17:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchema_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q18:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchemaForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDatabaseSchemaForSession" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchemaForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDatabaseSchemaForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchemaForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q19:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDatabaseSchemaForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q20:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructure_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataStructure" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructure_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataStructureResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructure_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q21="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q21:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructure_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q22:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructureForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataStructureForSession" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructureForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataStructureForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructureForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q23="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q23:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetDataStructureForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q24="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q24:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchema_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableSchema" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchema_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableSchemaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchema_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q25:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchema_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q26:DataException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchemaForSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableSchemaForSession" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchemaForSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableSchemaForSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchemaForSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q27:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IMetaDataService_GetTableSchemaForSession_DataExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q28="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q28:DataException" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CreateSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSession" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CreateSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CreateSession_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q29="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q29:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CreateSessionForCurrentUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSessionForCurrentUser" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CreateSessionForCurrentUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSessionForCurrentUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CreateSessionForCurrentUser_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q30="http://schemas.datacontract.org/2004/07/Lundalogik.Tangelo.Service" name="detail" element="q30:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_IsValidSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidSession" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_IsValidSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CloseSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:CloseSession" />
+  </wsdl:message>
+  <wsdl:message name="ISessionService_CloseSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CloseSessionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDataService">
+    <wsdl:operation name="ExecuteProcedure">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedure" message="tns:IDataService_ExecuteProcedure_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureResponse" message="tns:IDataService_ExecuteProcedure_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_ExecuteProcedure_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_ExecuteProcedure_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteProcedureForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureForSession" message="tns:IDataService_ExecuteProcedureForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureForSessionResponse" message="tns:IDataService_ExecuteProcedureForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_ExecuteProcedureForSession_ServiceExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_ExecuteProcedureForSession_DataExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiles">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFiles" message="tns:IDataService_GetFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesResponse" message="tns:IDataService_GetFiles_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_GetFiles_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_GetFiles_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFilesForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesForSession" message="tns:IDataService_GetFilesForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesForSessionResponse" message="tns:IDataService_GetFilesForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_GetFilesForSession_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetFilesForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_GetFilesForSession_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlQueryData">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryData" message="tns:IDataService_GetXmlQueryData_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataResponse" message="tns:IDataService_GetXmlQueryData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_GetXmlQueryData_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_GetXmlQueryData_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlQueryDataForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataForSession" message="tns:IDataService_GetXmlQueryDataForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataForSessionResponse" message="tns:IDataService_GetXmlQueryDataForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_GetXmlQueryDataForSession_ServiceExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_GetXmlQueryDataForSession_DataExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateData" message="tns:IDataService_UpdateData_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataResponse" message="tns:IDataService_UpdateData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_UpdateData_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_UpdateData_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDataForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataForSession" message="tns:IDataService_UpdateDataForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataForSessionResponse" message="tns:IDataService_UpdateDataForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IDataService_UpdateDataForSession_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IDataService/UpdateDataForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IDataService_UpdateDataForSession_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IMetaDataService">
+    <wsdl:operation name="GetDatabaseSchema">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchema" message="tns:IMetaDataService_GetDatabaseSchema_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaResponse" message="tns:IMetaDataService_GetDatabaseSchema_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaDataExceptionFault" name="DataExceptionFault" message="tns:IMetaDataService_GetDatabaseSchema_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaServiceExceptionFault" name="ServiceExceptionFault" message="tns:IMetaDataService_GetDatabaseSchema_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDatabaseSchemaForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaForSession" message="tns:IMetaDataService_GetDatabaseSchemaForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaForSessionResponse" message="tns:IMetaDataService_GetDatabaseSchemaForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IMetaDataService_GetDatabaseSchemaForSession_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IMetaDataService_GetDatabaseSchemaForSession_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataStructure">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructure" message="tns:IMetaDataService_GetDataStructure_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureResponse" message="tns:IMetaDataService_GetDataStructure_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureDataExceptionFault" name="DataExceptionFault" message="tns:IMetaDataService_GetDataStructure_DataExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureServiceExceptionFault" name="ServiceExceptionFault" message="tns:IMetaDataService_GetDataStructure_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataStructureForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureForSession" message="tns:IMetaDataService_GetDataStructureForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureForSessionResponse" message="tns:IMetaDataService_GetDataStructureForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IMetaDataService_GetDataStructureForSession_ServiceExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IMetaDataService_GetDataStructureForSession_DataExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTableSchema">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchema" message="tns:IMetaDataService_GetTableSchema_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaResponse" message="tns:IMetaDataService_GetTableSchema_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaServiceExceptionFault" name="ServiceExceptionFault" message="tns:IMetaDataService_GetTableSchema_ServiceExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaDataExceptionFault" name="DataExceptionFault" message="tns:IMetaDataService_GetTableSchema_DataExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTableSchemaForSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaForSession" message="tns:IMetaDataService_GetTableSchemaForSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaForSessionResponse" message="tns:IMetaDataService_GetTableSchemaForSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaForSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IMetaDataService_GetTableSchemaForSession_ServiceExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaForSessionDataExceptionFault" name="DataExceptionFault" message="tns:IMetaDataService_GetTableSchemaForSession_DataExceptionFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ISessionService">
+    <wsdl:operation name="CreateSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CreateSession" message="tns:ISessionService_CreateSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CreateSessionResponse" message="tns:ISessionService_CreateSession_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CreateSessionServiceExceptionFault" name="ServiceExceptionFault" message="tns:ISessionService_CreateSession_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSessionForCurrentUser">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CreateSessionForCurrentUser" message="tns:ISessionService_CreateSessionForCurrentUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CreateSessionForCurrentUserResponse" message="tns:ISessionService_CreateSessionForCurrentUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CreateSessionForCurrentUserServiceExceptionFault" name="ServiceExceptionFault" message="tns:ISessionService_CreateSessionForCurrentUser_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/IsValidSession" message="tns:ISessionService_IsValidSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/IsValidSessionResponse" message="tns:ISessionService_IsValidSession_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <wsdl:input wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CloseSession" message="tns:ISessionService_CloseSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://lundalogik.se/Tangelo/ISessionService/CloseSessionResponse" message="tns:ISessionService_CloseSession_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

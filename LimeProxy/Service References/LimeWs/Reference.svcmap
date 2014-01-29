@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4ef12348-913e-4619-8e8e-e385da7eb951" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:23183/meta" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="meta.xsd" MetadataType="Schema" ID="34ca6a80-ce04-4518-bdea-7fd2d0d6b084" SourceId="1" SourceUrl="http://localhost:23183/meta?xsd=xsd1" />
+    <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="e04c99d4-2aa1-4b0b-ab0e-2d539bd9fdd6" SourceId="1" SourceUrl="http://localhost:23183/meta" />
+    <MetadataFile FileName="meta.wsdl" MetadataType="Wsdl" ID="fa747c0c-2154-44fe-a910-53166fc53dd3" SourceId="1" SourceUrl="http://localhost:23183/meta?wsdl=wsdl0" />
+    <MetadataFile FileName="meta1.xsd" MetadataType="Schema" ID="288d66ad-40bc-4e27-bfcc-bb516a871687" SourceId="1" SourceUrl="http://localhost:23183/meta?xsd=xsd0" />
+    <MetadataFile FileName="meta2.xsd" MetadataType="Schema" ID="47a6bfe3-47a9-4771-9102-8a7ff960f977" SourceId="1" SourceUrl="http://localhost:23183/meta?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://lundalogik.se/Tangelo/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DataService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://lundalogik.se/Tangelo/" location="http://localhost:23183/meta?wsdl=wsdl0" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_IDataService" type="i0:IDataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExecuteProcedure">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteProcedureForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/ExecuteProcedureForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiles">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/GetFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFilesForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/GetFilesForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlQueryData">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlQueryDataForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/GetXmlQueryDataForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateData">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/UpdateData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDataForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IDataService/UpdateDataForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IMetaDataService" type="i0:IMetaDataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetDatabaseSchema">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDatabaseSchemaForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IMetaDataService/GetDatabaseSchemaForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataStructure">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructure" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataStructureForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IMetaDataService/GetDataStructureForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTableSchema">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchema" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetTableSchemaForSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/IMetaDataService/GetTableSchemaForSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataExceptionFault">
+        <soap:fault use="literal" name="DataExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_ISessionService" type="i0:ISessionService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/ISessionService/CreateSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSessionForCurrentUser">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/ISessionService/CreateSessionForCurrentUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/ISessionService/IsValidSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <soap:operation soapAction="http://lundalogik.se/Tangelo/ISessionService/CloseSession" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataService">
+    <wsdl:port name="BasicHttpBinding_IDataService" binding="tns:BasicHttpBinding_IDataService">
+      <soap:address location="http://localhost:23183/" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IMetaDataService" binding="tns:BasicHttpBinding_IMetaDataService">
+      <soap:address location="http://localhost:23183/" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_ISessionService" binding="tns:BasicHttpBinding_ISessionService">
+      <soap:address location="http://localhost:23183/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
