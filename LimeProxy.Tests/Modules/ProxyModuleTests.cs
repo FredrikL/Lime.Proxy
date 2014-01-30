@@ -4,6 +4,7 @@ using FakeItEasy;
 using LimeProxy.Models;
 using LimeProxy.Modules;
 using LimeProxy.Proxy;
+using Nancy;
 using Nancy.Testing;
 using NUnit.Framework;
 
@@ -129,5 +130,38 @@ namespace LimeProxy.Tests.Modules
             Assert.That(result.Headers["Access-Control-Allow-Methods"], Is.EqualTo("POST, OPTIONS, GET"));
             Assert.That(result.Headers["Access-Control-Allow-Headers"], Is.EqualTo("Accept, Origin, Content-type"));
         }
+
+        [Test]
+        public void ShouldSetStatusCodeTo500IfErrorOccuredForStoredProcedure()
+        {
+            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
+            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("some_sp", A<ProcedureParameters>._))
+                .Returns(new Result() { Success = false });
+            var result = browser.Post("/v1/sp/some_sp", with =>
+            {
+                with.HttpRequest();
+                with.Header("accept", "application/json");
+                with.Header("Content-Type", "application/json");
+            });
+
+            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        }
+
+        [Test]
+        public void ShouldSetStatusCodeTo500IfErrorOccuredForTable()
+        {
+            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
+            A.CallTo(() => limeWebServiceProxy.QueryTable("foo", A<TableQuery>._))
+                .Returns(new Result() { Success = false });
+            var result = browser.Post("/v1/table/foo", with =>
+            {
+                with.HttpRequest();
+                with.Header("accept", "application/json");
+                with.Header("Content-Type", "application/json");
+            });
+
+            Assert.That(result.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
+        }
+
     }
 }

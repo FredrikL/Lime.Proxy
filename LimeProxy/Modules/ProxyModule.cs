@@ -17,13 +17,23 @@ namespace LimeProxy.Modules
             Post["/sp/{name}"] = x =>
             {
                 var param = this.Bind<ProcedureParameters>();
-                return limeWebServiceProxy.ExecuteStoredProcedure(x.name, param);
+                Result result = limeWebServiceProxy.ExecuteStoredProcedure(x.name, param);
+
+                if(result.Success)
+                    return result;
+
+                return HttpStatusCode.InternalServerError;
             };
 
             Post["/table/{name}"] = x =>
             {
                 var param = this.Bind<TableQuery>();
-                return limeWebServiceProxy.QueryTable(x.name, param);
+                Result result = limeWebServiceProxy.QueryTable(x.name, param);
+
+                if (result.Success)
+                    return result;
+
+                return HttpStatusCode.InternalServerError;
             };
 
             After += ctx => ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
