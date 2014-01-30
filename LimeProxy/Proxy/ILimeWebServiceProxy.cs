@@ -72,13 +72,14 @@ namespace LimeProxy.Proxy
         private string BuildProcedureXml(string name, ProcedureParameters parameters)
         {
             var x = new XElement("procedure", new XAttribute("name", name));
-            foreach (var param in parameters.Parameters)
-            {
-                x.Add(new XElement("parameter",
-                    new XAttribute("name", param.Name),
-                    new XAttribute("value", param.Value),
-                    new XAttribute("valuetype", _valueTypeProvider.GetForStoredProcedure(param.Value))));
-            }
+
+            if (parameters.Parameters != null)
+                foreach (var param in parameters.Parameters)
+                    x.Add(new XElement("parameter",
+                        new XAttribute("name", param.Name),
+                        new XAttribute("value", param.Value),
+                        new XAttribute("valuetype", _valueTypeProvider.GetForStoredProcedure(param.Value))));
+
             return x.ToString();
         }
 

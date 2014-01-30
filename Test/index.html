@@ -23,19 +23,32 @@
 			console.log(textStatus);
 		});
 
-		var d = JSON.stringify({
-				Fields: ["name"],
-				Conditions: [{Field: "idcoworker", Operator:"=", Value:169001 }]
-			});
-		console.log(d)
-
 		$.ajax({
 			contentType: 'application/json',
 
-                    data: d,
+                    data: JSON.stringify({
+				Fields: ["name"],
+				Conditions: [{Field: "idcoworker", Operator:"=", Value:169001 }]
+			}),
                     dataType: 'json',
                     type: 'POST',
                     url: 'http://localhost:8000/v1/table/coworker',
+			crossDomain: true
+		}).done(function( data ) {
+			console.log(data);
+			console.log("done");
+		})
+		.fail( function(xhr, textStatus, errorThrown) {
+			console.log(xhr.responseText);
+			console.log(textStatus);
+		});
+
+		$.ajax({
+			contentType: 'application/json',
+                    data: JSON.stringify({ }),
+                    dataType: 'json',
+                    type: 'POST',
+                    url: 'http://localhost:8000/v1/sp/csp_gethelpdeskstatistics',
 			crossDomain: true
 		}).done(function( data ) {
 			console.log(data);
