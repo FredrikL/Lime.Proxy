@@ -1,0 +1,28 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+	Hai
+
+
+	<script>
+	$(function() {
+
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:8000/v1/Echo/Foo",
+			crossDomain : true,
+		})
+		.done(function( data ) {
+			console.log(data);
+			console.log("done");
+		})
+		.fail( function(xhr, textStatus, errorThrown) {
+			alert(xhr.responseText);
+			alert(textStatus);
+		});
+	});
+	</script>
+</body>
+</html>
