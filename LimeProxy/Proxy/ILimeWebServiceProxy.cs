@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using LimeProxy.Models;
@@ -48,7 +49,12 @@ namespace LimeProxy.Proxy
 
         public Result QueryTable(string name, TableQuery parameters)
         {
-            throw new System.NotImplementedException();
+            var xml = BuildQueryXml(name, parameters);
+            var result = _limeWebSerivceClientInvoker.QueryTable(xml);
+            return new Result()
+            {
+                Success = true
+            };
         }
 
         private string BuildProcedureXml(string name, ProcedureParameters parameters)
@@ -59,9 +65,34 @@ namespace LimeProxy.Proxy
                 x.Add(new XElement("parameter",
                     new XAttribute("name", param.Name),
                     new XAttribute("value", param.Value),
-                    new XAttribute("valuetype", _valueTypeProvider.Get(param.Value))));
+                    new XAttribute("valuetype", _valueTypeProvider.GetForStoredProcedure(param.Value))));
             }
             return x.ToString();
+        }
+
+        private string BuildQueryXml(string name, TableQuery parameters)
+        {
+            var q = new XElement("query",
+                new XElement("tables", new XElement("table", name)
+                    ));
+
+            if (parameters.Fields != null && parameters.Fields.Any())
+            {
+                q.Add(new XElement("fields",
+                    (parameters.Fields.Select(f => new XElement("field", f)))));
+            }
+
+            if (parameters.Conditions != null && parameters.Conditions.Any())
+            {
+                q.Add(new XElement("conditions",
+                    (parameters.Conditions.Select(c => new XElement("condition",
+                        new XAttribute("operator", c.Operator),
+                        new XElement("exp", new XAttribute("type", "field"), c.Field),
+                        new XElement("exp", new XAttribute("type", _valueTypeProvider.GetForQuery(c.Value)),
+                            c.Value))))));
+            }
+
+            return q.ToString();
         }
 
         private string ConvertFromXmlStringToJsonString(string xml)
@@ -70,6 +101,11 @@ namespace LimeProxy.Proxy
             doc.LoadXml(xml);
             string jsonText = JsonConvert.SerializeXmlNode(doc.SelectSingleNode("/data"));
             return jsonText;
+        }
+
+        private string Foo(object value)
+        {
+            return string.Empty;
         }
     }
 }

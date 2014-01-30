@@ -5,14 +5,31 @@ namespace LimeProxy.Proxy
 {
     public interface IValueTypeProvider
     {
-        int Get(object value);
+        int GetForStoredProcedure(object value);
+        string GetForQuery(object value);
     }
 
     public class ValueTypeProvider : IValueTypeProvider
     {
-        public int Get(object value)
+        public int GetForStoredProcedure(object value)
         {
             return (int) GetVarEnum(value);
+        }
+
+        public string GetForQuery(object value)
+        {
+             Type type = value.GetType();
+            if (type == typeof(int) ||
+                type == typeof(long) ||
+                type == typeof(float) ||
+                type == typeof(double) ||
+                type == typeof(Decimal))
+                return "numeric";
+
+            if (type == typeof (DateTime))
+                return "date";
+
+            return "string";
         }
 
         private VarEnum GetVarEnum(object value)

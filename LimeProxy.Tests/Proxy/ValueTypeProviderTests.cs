@@ -14,7 +14,7 @@ namespace LimeProxy.Tests.Proxy
         {
             int i = 0;
 
-            var result = valueTypeProvider.Get(i);
+            var result = valueTypeProvider.GetForStoredProcedure(i);
 
             Assert.That(result, Is.EqualTo(3));
         }
@@ -24,7 +24,7 @@ namespace LimeProxy.Tests.Proxy
         {
             long l = 0;
 
-            var result = valueTypeProvider.Get(l);
+            var result = valueTypeProvider.GetForStoredProcedure(l);
 
             Assert.That(result, Is.EqualTo(3));
         }
@@ -34,7 +34,7 @@ namespace LimeProxy.Tests.Proxy
         {
             float f = 0;
 
-            var result = valueTypeProvider.Get(f);
+            var result = valueTypeProvider.GetForStoredProcedure(f);
 
             Assert.That(result, Is.EqualTo(4));
         }
@@ -44,7 +44,7 @@ namespace LimeProxy.Tests.Proxy
         {
             double d = 0;
 
-            var result = valueTypeProvider.Get(d);
+            var result = valueTypeProvider.GetForStoredProcedure(d);
 
             Assert.That(result, Is.EqualTo(5));
         }
@@ -54,7 +54,7 @@ namespace LimeProxy.Tests.Proxy
         {
             decimal d = 0;
 
-            var result = valueTypeProvider.Get(d);
+            var result = valueTypeProvider.GetForStoredProcedure(d);
 
             Assert.That(result, Is.EqualTo(14));
         }
@@ -64,7 +64,7 @@ namespace LimeProxy.Tests.Proxy
         {
             DateTime d = DateTime.MinValue;
 
-            var result = valueTypeProvider.Get(d);
+            var result = valueTypeProvider.GetForStoredProcedure(d);
 
             Assert.That(result, Is.EqualTo(7));
         }
@@ -74,7 +74,7 @@ namespace LimeProxy.Tests.Proxy
         {
             bool b = true;
 
-            var result = valueTypeProvider.Get(b);
+            var result = valueTypeProvider.GetForStoredProcedure(b);
 
             Assert.That(result, Is.EqualTo(11));
         }
@@ -85,7 +85,7 @@ namespace LimeProxy.Tests.Proxy
         {
             byte b = 0;
 
-            var result = valueTypeProvider.Get(b);
+            var result = valueTypeProvider.GetForStoredProcedure(b);
 
             Assert.That(result, Is.EqualTo(17));
         }
@@ -96,9 +96,44 @@ namespace LimeProxy.Tests.Proxy
         {
             string s = string.Empty;
 
-            var result = valueTypeProvider.Get(s);
+            var result = valueTypeProvider.GetForStoredProcedure(s);
 
             Assert.That(result, Is.EqualTo(8));
+        }
+
+        [TestCase(1)]
+        [TestCase(1L)]
+        [TestCase(1F)]
+        [TestCase(1D)]
+        public void ShouldReturnNumericForNumbers(object value)
+        {
+            var result = valueTypeProvider.GetForQuery(value);
+
+            Assert.That(result, Is.EqualTo("numeric"));
+        }
+
+        [Test]
+        public void ShouldReturnNumericForDecimal()
+        {
+            var result = valueTypeProvider.GetForQuery(1.0M);
+
+            Assert.That(result, Is.EqualTo("numeric"));
+        }
+
+        [Test]
+        public void ShouldReturnDateForDateTime()
+        {
+            var result = valueTypeProvider.GetForQuery(DateTime.MinValue);
+
+            Assert.That(result, Is.EqualTo("date"));
+        }
+
+        [Test]
+        public void ShouldReturnStringForstring()
+        {
+            var result = valueTypeProvider.GetForQuery(string.Empty);
+
+            Assert.That(result, Is.EqualTo("string"));
         }
     }
 }

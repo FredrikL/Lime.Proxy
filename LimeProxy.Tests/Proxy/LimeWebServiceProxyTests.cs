@@ -54,7 +54,7 @@ namespace LimeProxy.Tests.Proxy
 
             proxy.ExecuteStoredProcedure(string.Empty, pp);
             
-            A.CallTo(() => p.Get(pp.Parameters.First().Value)).MustHaveHappened();
+            A.CallTo(() => p.GetForStoredProcedure(pp.Parameters.First().Value)).MustHaveHappened();
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace LimeProxy.Tests.Proxy
                     },
                 }
             };
-            A.CallTo(() => p.Get(A<object>._)).Returns(99);
+            A.CallTo(() => p.GetForStoredProcedure(A<object>._)).Returns(99);
             var name = "csp_some_proc";
             var expected = new XElement("procedure", new XAttribute("name", name),
                new XElement("parameter",
@@ -147,6 +147,8 @@ namespace LimeProxy.Tests.Proxy
         {
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).
+               Returns(@"<?xml version=""1.0"" encoding=""UTF-16"" ?><data />");
 
             var result = proxy.ExecuteStoredProcedure(name, p);
 
@@ -181,5 +183,65 @@ namespace LimeProxy.Tests.Proxy
 
             Assert.That(result.Data, Is.StringStarting("{\"data\":{"));
         }
+
+        [Test]
+        public void ShouldCreateSimpleQuery()
+        {
+            var t = new TableQuery() {};
+            var name = "customer";
+
+            var expected = new XElement("query", 
+                new XElement("tables", new XElement("table", name)
+                    )).ToString();
+
+            proxy.QueryTable(name, t);
+
+            A.CallTo(() =>limeWebSerivceClientInvoker.QueryTable(expected)).MustHaveHappened();
+        }
+
+        [Test]
+        public void ShouldAddFieldsToQuery()
+        {
+            var t = new TableQuery() {Fields = new[] {"A", "B"}};
+            var name = "company";
+
+            var expected = new XElement("query",
+                new XElement("tables", new XElement("table", name)),
+                new XElement("fields",
+                    new XElement("field", "A"),
+                    new XElement("field", "B"))
+                ).ToString();
+
+            proxy.QueryTable(name, t);
+
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(expected)).MustHaveHappened();
+        }
+
+        [Test]
+        public void ShouldAddConditionsToQuery()
+        {
+            var t = new TableQuery()
+            {
+                Conditions = new[]
+                {
+                    new Condition() {Field = "id", Operator = "=", Value = 123},
+                }
+            };
+            var name = "X";
+
+            var expected = new XElement("query",
+                new XElement("tables", new XElement("table", name)),
+                new XElement("conditions",
+                    new XElement("condition", new XAttribute("operator", "="),
+                        new XElement("exp", new XAttribute("type", "field"), "id"),
+                        new XElement("exp", new XAttribute("type", "numeric"), 123)))
+                ).ToString();
+
+            proxy.QueryTable(name, t);
+
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(expected)).MustHaveHappened();
+        }
+
+        
     }
 }
