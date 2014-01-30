@@ -67,6 +67,7 @@
     <Compile Include="Modules\ProxyModule.cs" />
     <Compile Include="Proxy\ILimeWebSerivceClientInvoker.cs" />
     <Compile Include="Proxy\ILimeWebServiceProxy.cs" />
+    <Compile Include="Validation\IOperatorValidator.cs" />
     <Compile Include="Proxy\IValueTypeProvider.cs" />
     <Compile Include="Proxy\LimeWebServiceClientInvoker.cs" />
     <Compile Include="Service References\LimeWs\Reference.cs">
