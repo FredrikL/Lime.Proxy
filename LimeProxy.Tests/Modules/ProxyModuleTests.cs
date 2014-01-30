@@ -112,6 +112,22 @@ namespace LimeProxy.Tests.Modules
             A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>.That.Matches(matcher, ""))).MustHaveHappened();
         }
 
+        [TestCase("/v1/table/customer")]
+        [TestCase("/v1/sp/csp_some_sp")]
+        public void ShouldReturnsNeededCorsHeadersForOptionsMethod(string url)
+        {
+            var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
 
+            var result = browser.Options(url, with =>
+            {
+                with.HttpRequest();
+                with.Header("accept", "application/json");
+                with.Header("Content-Type", "application/json");
+            });
+
+            Assert.That(result.Headers["Access-Control-Allow-Origin"], Is.EqualTo("*"));
+            Assert.That(result.Headers["Access-Control-Allow-Methods"], Is.EqualTo("POST, OPTIONS, GET"));
+            Assert.That(result.Headers["Access-Control-Allow-Headers"], Is.EqualTo("Accept, Origin, Content-type"));
+        }
     }
 }

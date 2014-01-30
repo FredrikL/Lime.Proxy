@@ -11,6 +11,9 @@ namespace LimeProxy.Modules
         {
             Get["/Echo/{data}"] = x => Response.AsText((string)x.data);
 
+            Options["/table/{name}"] = AddCorsHeadersForOptionsRequest;
+            Options["/sp/{name}"] = AddCorsHeadersForOptionsRequest;
+            
             Post["/sp/{name}"] = x =>
             {
                 var param = this.Bind<ProcedureParameters>();
@@ -24,6 +27,13 @@ namespace LimeProxy.Modules
             };
 
             After += ctx => ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+        }
+
+        private Response AddCorsHeadersForOptionsRequest(dynamic x)
+        {
+            return this.Response.AsJson(Request)
+                .WithHeader("Access-Control-Allow-Methods", "POST, OPTIONS, GET")
+                .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
         }
     }
 }

@@ -49,12 +49,24 @@ namespace LimeProxy.Proxy
 
         public Result QueryTable(string name, TableQuery parameters)
         {
+            try
+            {
             var xml = BuildQueryXml(name, parameters);
             var result = _limeWebSerivceClientInvoker.QueryTable(xml);
+            var json = ConvertFromXmlStringToJsonString(result);
             return new Result()
             {
+                Data = json,
                 Success = true
             };
+            }
+            catch (Exception ex)
+            {
+                return new Result()
+                {
+                    Success = false
+                };
+            }
         }
 
         private string BuildProcedureXml(string name, ProcedureParameters parameters)
