@@ -1,21 +1,19 @@
-﻿namespace LimeProxy.Proxy
+﻿using LimeProxy.LimeWs;
+
+namespace LimeProxy.Proxy
 {
     public class LimeWebServiceClientInvoker : ILimeWebSerivceClientInvoker
     {
-        //public void x()
-        //{
-        //    LimeWs.DataServiceClient client = new DataServiceClient();
-        //    client.ExecuteProcedure()
-        //}
-
         public string ExecuteProcedure(string xml)
         {
-            throw new System.NotImplementedException();
+            var client = new DataServiceClient();
+            return client.ExecuteProcedure(ref xml, false);
         }
 
         public string QueryTable(string xml)
         {
-            throw new System.NotImplementedException();
+            var client = new DataServiceClient();
+            return client.GetXmlQueryData(xml);
         }
     }
 }
