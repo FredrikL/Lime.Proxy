@@ -102,10 +102,5 @@ namespace LimeProxy.Proxy
             string jsonText = JsonConvert.SerializeXmlNode(doc.SelectSingleNode("/data"));
             return jsonText;
         }
-
-        private string Foo(object value)
-        {
-            return string.Empty;
-        }
     }
 }
