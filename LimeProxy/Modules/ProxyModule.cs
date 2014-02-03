@@ -20,9 +20,9 @@ namespace LimeProxy.Modules
                 Result result = limeWebServiceProxy.ExecuteStoredProcedure(x.name, param);
 
                 if(result.Success)
-                    return result;
+                    return Response.AsJson(result.Data);
 
-                return HttpStatusCode.InternalServerError;
+                return Response.AsJson(result.Data, HttpStatusCode.InternalServerError);
             };
 
             Post["/table/{name}"] = x =>
@@ -31,9 +31,9 @@ namespace LimeProxy.Modules
                 Result result = limeWebServiceProxy.QueryTable(x.name, param);
 
                 if (result.Success)
-                    return result;
+                    return Response.AsJson(result.Data);
 
-                return HttpStatusCode.InternalServerError;
+                return Response.AsJson(result.Data, HttpStatusCode.InternalServerError);
             };
 
             After += ctx => ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");

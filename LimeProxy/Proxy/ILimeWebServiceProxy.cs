@@ -3,6 +3,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using LimeProxy.Models;
+using Nancy.Json;
 using Newtonsoft.Json;
 
 namespace LimeProxy.Proxy
@@ -42,7 +43,8 @@ namespace LimeProxy.Proxy
             {
                 return new Result()
                 {
-                    Success = false
+                    Success = false,
+                    Data = JsonConvert.SerializeObject(ex)
                 };
             }
         }
@@ -51,20 +53,21 @@ namespace LimeProxy.Proxy
         {
             try
             {
-            var xml = BuildQueryXml(name, parameters);
-            var result = _limeWebSerivceClientInvoker.QueryTable(xml);
-            var json = ConvertFromXmlStringToJsonString(result);
-            return new Result()
-            {
-                Data = json,
-                Success = true
-            };
+                var xml = BuildQueryXml(name, parameters);
+                var result = _limeWebSerivceClientInvoker.QueryTable(xml);
+                var json = ConvertFromXmlStringToJsonString(result);
+                return new Result()
+                {
+                    Data = json,
+                    Success = true
+                };
             }
             catch (Exception ex)
             {
                 return new Result()
                 {
-                    Success = false
+                    Success = false,
+                    Data = JsonConvert.SerializeObject(ex)
                 };
             }
         }
