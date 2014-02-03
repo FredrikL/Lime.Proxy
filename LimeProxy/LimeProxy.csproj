@@ -73,6 +73,7 @@
     <Compile Include="Modules\ProxyModule.cs" />
     <Compile Include="Proxy\ILimeWebSerivceClientInvoker.cs" />
     <Compile Include="Proxy\ILimeWebServiceProxy.cs" />
+    <Compile Include="Builders\IXmlBuilder.cs" />
     <Compile Include="Validation\IOperatorValidator.cs" />
     <Compile Include="Proxy\IValueTypeProvider.cs" />
     <Compile Include="Proxy\LimeWebServiceClientInvoker.cs" />
@@ -124,6 +125,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

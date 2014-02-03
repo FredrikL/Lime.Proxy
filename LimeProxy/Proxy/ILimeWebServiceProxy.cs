@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
+using LimeProxy.Builders;
 using LimeProxy.Models;
 using Newtonsoft.Json;
 
@@ -16,20 +15,20 @@ namespace LimeProxy.Proxy
     public class LimeWebServiceProxy : ILimeWebServiceProxy
     {
         private readonly ILimeWebSerivceClientInvoker _limeWebSerivceClientInvoker;
-        private readonly IValueTypeProvider _valueTypeProvider;
+        private readonly IXmlBuilder _xmlBuilder;
 
         public LimeWebServiceProxy(ILimeWebSerivceClientInvoker limeWebSerivceClientInvoker,
-            IValueTypeProvider valueTypeProvider)
+            IXmlBuilder xmlBuilder)
         {
             _limeWebSerivceClientInvoker = limeWebSerivceClientInvoker;
-            _valueTypeProvider = valueTypeProvider;
+            _xmlBuilder = xmlBuilder;
         }
 
         public Result ExecuteStoredProcedure(string name, ProcedureParameters parameters)
         {
             try
             {
-                var xml = BuildProcedureXml(name, parameters);
+                var xml = _xmlBuilder.BuildProcedureXml(name, parameters);
                 var result = _limeWebSerivceClientInvoker.ExecuteProcedure(xml);
                 var json = ConvertFromXmlStringToJsonString(result);
                 return new Result()
@@ -52,7 +51,7 @@ namespace LimeProxy.Proxy
         {
             try
             {
-                var xml = BuildQueryXml(name, parameters);
+                var xml = _xmlBuilder.BuildQueryXml(name, parameters);
                 var result = _limeWebSerivceClientInvoker.QueryTable(xml);
                 var json = ConvertFromXmlStringToJsonString(result);
                 return new Result()
@@ -69,45 +68,6 @@ namespace LimeProxy.Proxy
                     Data = JsonConvert.SerializeObject(ex)
                 };
             }
-        }
-
-        private string BuildProcedureXml(string name, ProcedureParameters parameters)
-        {
-            var x = new XElement("procedure", new XAttribute("name", name));
-
-            if (parameters.Parameters != null)
-                foreach (var param in parameters.Parameters)
-                    x.Add(new XElement("parameter",
-                        new XAttribute("name", param.Name),
-                        new XAttribute("value", param.Value),
-                        new XAttribute("valuetype", _valueTypeProvider.GetForStoredProcedure(param.Value))));
-
-            return x.ToString();
-        }
-
-        private string BuildQueryXml(string name, TableQuery parameters)
-        {
-            var q = new XElement("query",
-                new XElement("tables", new XElement("table", name)
-                    ));
-
-            if (parameters.Fields != null && parameters.Fields.Any())
-            {
-                q.Add(new XElement("fields",
-                    (parameters.Fields.Select(f => new XElement("field", f)))));
-            }
-
-            if (parameters.Conditions != null && parameters.Conditions.Any())
-            {
-                q.Add(new XElement("conditions",
-                    (parameters.Conditions.Select(c => new XElement("condition",
-                        new XAttribute("operator", c.Operator),
-                        new XElement("exp", new XAttribute("type", "field"), c.Field),
-                        new XElement("exp", new XAttribute("type", _valueTypeProvider.GetForQuery(c.Value)),
-                            c.Value))))));
-            }
-
-            return q.ToString();
         }
 
         private string ConvertFromXmlStringToJsonString(string xml)
