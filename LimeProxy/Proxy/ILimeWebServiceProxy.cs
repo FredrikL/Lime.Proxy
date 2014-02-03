@@ -3,6 +3,7 @@ using System.Xml;
 using LimeProxy.Builders;
 using LimeProxy.Models;
 using Newtonsoft.Json;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace LimeProxy.Proxy
 {
@@ -74,7 +75,7 @@ namespace LimeProxy.Proxy
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            string jsonText = JsonConvert.SerializeXmlNode(doc.SelectSingleNode("/data"));
+            string jsonText = JsonConvert.SerializeXmlNode(doc.SelectSingleNode("/data"), Formatting.None, true);
             return jsonText;
         }
     }

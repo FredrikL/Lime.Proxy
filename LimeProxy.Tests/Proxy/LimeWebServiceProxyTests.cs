@@ -99,7 +99,7 @@ namespace LimeProxy.Tests.Proxy
 
             var result = proxy.ExecuteStoredProcedure(name, p);
 
-            Assert.That(result.Data, Is.StringStarting("{\"data\":{\"person\":"));
+            Assert.That(result.Data, Is.StringStarting("{\"person\":"));
         }
 
         [Test]
@@ -178,7 +178,7 @@ namespace LimeProxy.Tests.Proxy
 
             var result = proxy.QueryTable(name, t);
 
-            Assert.That(result.Data, Is.StringStarting("{\"data\":{\"person\":"));
+            Assert.That(result.Data, Is.StringStarting("{\"person\":"));
         }
     }
 }
