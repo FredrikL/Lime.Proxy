@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimeProxy", "LimeProxy\Lime
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimeProxy.Tests", "LimeProxy.Tests\LimeProxy.Tests.csproj", "{5AE6C812-FF4F-421D-81D0-69D8F2211781}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LimeProxy.Service", "LimeProxy.Service\LimeProxy.Service.csproj", "{A311FC9B-87E4-474C-841A-EAC08A34C351}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{5AE6C812-FF4F-421D-81D0-69D8F2211781}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AE6C812-FF4F-421D-81D0-69D8F2211781}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AE6C812-FF4F-421D-81D0-69D8F2211781}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A311FC9B-87E4-474C-841A-EAC08A34C351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A311FC9B-87E4-474C-841A-EAC08A34C351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A311FC9B-87E4-474C-841A-EAC08A34C351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A311FC9B-87E4-474C-841A-EAC08A34C351}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

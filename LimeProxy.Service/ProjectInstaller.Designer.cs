@@ -1,4 +1,4 @@
-﻿namespace LimeProxy
+﻿namespace LimeProxy.Service
 {
     partial class ProjectInstaller
     {
@@ -33,7 +33,6 @@
             // 
             // serviceProcessInstaller1
             // 
-            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.NetworkService;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
@@ -41,8 +40,7 @@
             // 
             this.serviceInstaller1.Description = "Json proxy for queries against lime webservice";
             this.serviceInstaller1.DisplayName = "LimeProxy";
-            this.serviceInstaller1.ServiceName = "LimeProxy";
-            this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller1.ServiceName = "NancyServiceHost";
             // 
             // ProjectInstaller
             // 

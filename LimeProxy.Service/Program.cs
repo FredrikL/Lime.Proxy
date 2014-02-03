@@ -5,7 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LimeProxy
+namespace LimeProxy.Service
 {
     static class Program
     {
@@ -17,7 +17,7 @@ namespace LimeProxy
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
             { 
-                new Service1() 
+                new NancyServiceHost() 
             };
             ServiceBase.Run(ServicesToRun);
         }

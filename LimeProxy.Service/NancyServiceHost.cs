@@ -3,17 +3,16 @@ using System.Configuration;
 using System.ServiceProcess;
 using Nancy.Hosting.Self;
 
-namespace LimeProxy
+namespace LimeProxy.Service
 {
-    public partial class Service1 : ServiceBase
+    public partial class NancyServiceHost : ServiceBase
     {
         private NancyHost _nancyHost;
 
-        public Service1()
+        public NancyServiceHost()
         {
             InitializeComponent();
         }
-
         protected override void OnStart(string[] args)
         {
             _nancyHost = new NancyHost(new Uri(ConfigurationManager.AppSettings["listen"]));

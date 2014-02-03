@@ -3,7 +3,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using LimeProxy.Models;
-using Nancy.Json;
 using Newtonsoft.Json;
 
 namespace LimeProxy.Proxy
