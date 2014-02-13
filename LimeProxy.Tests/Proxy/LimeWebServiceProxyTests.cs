@@ -29,7 +29,7 @@ namespace LimeProxy.Tests.Proxy
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
 
-            proxy.ExecuteStoredProcedure(name, p);
+            proxy.ExecuteStoredProcedure(A.Dummy<string>(), name, p);
 
             A.CallTo(() => xmlBuilder.BuildProcedureXml(name,p)).MustHaveHappened();
         }
@@ -40,11 +40,12 @@ namespace LimeProxy.Tests.Proxy
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
             var xml = "not xml";
+            var db = "some_db";
             A.CallTo(() => xmlBuilder.BuildProcedureXml(name, p)).Returns(xml);
 
-            proxy.ExecuteStoredProcedure(name, p);
+            proxy.ExecuteStoredProcedure(db, name, p);
 
-            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(xml)).MustHaveHappened();
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(db, xml)).MustHaveHappened();
         }
 
         [Test]
@@ -52,10 +53,10 @@ namespace LimeProxy.Tests.Proxy
         {
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
-            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._, A<string>._)).
                Returns(@"<?xml version=""1.0"" encoding=""UTF-16"" ?><data />");
 
-            var result = proxy.ExecuteStoredProcedure(name, p);
+            var result = proxy.ExecuteStoredProcedure(A.Dummy<string>(), name, p);
 
             Assert.That(result.Success, Is.True);
         }
@@ -66,9 +67,9 @@ namespace LimeProxy.Tests.Proxy
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
 
-            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).Throws<Exception>();
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._, A<string>._)).Throws<Exception>();
 
-            var result = proxy.ExecuteStoredProcedure(name, p);
+            var result = proxy.ExecuteStoredProcedure(A.Dummy<string>(), name, p);
 
             Assert.That(result.Success, Is.False);
         }
@@ -79,9 +80,9 @@ namespace LimeProxy.Tests.Proxy
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
 
-            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).Throws<Exception>();
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._, A<string>._)).Throws<Exception>();
 
-            var result = proxy.ExecuteStoredProcedure(name, p);
+            var result = proxy.ExecuteStoredProcedure(A.Dummy<string>(), name, p);
 
             Assert.That(result.Data, Is.Not.Empty);
         }
@@ -91,13 +92,13 @@ namespace LimeProxy.Tests.Proxy
         {
             var p = new ProcedureParameters() { Parameters = new Parameter[] { } };
             var name = "csp_some_proc";
-            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._)).
+            A.CallTo(() => limeWebSerivceClientInvoker.ExecuteProcedure(A<string>._, A<string>._)).
                 Returns(@"<?xml version=""1.0"" encoding=""UTF-16"" ?>
 <data>
 	<person name=""Karl Kula"" email=""karl.kula@fakeorg.se"" phone=""08-123 123""/>
 </data>");
 
-            var result = proxy.ExecuteStoredProcedure(name, p);
+            var result = proxy.ExecuteStoredProcedure(A.Dummy<string>(), name, p);
 
             Assert.That(result.Data, Is.StringStarting("{\"person\":"));
         }
@@ -108,7 +109,7 @@ namespace LimeProxy.Tests.Proxy
             var t = new TableQuery() { };
             var name = "foo";
 
-            proxy.QueryTable(name, t);
+            proxy.QueryTable(A.Dummy<string>(), name, t);
 
             A.CallTo(() => xmlBuilder.BuildQueryXml(name, t)).MustHaveHappened();
         }
@@ -119,11 +120,12 @@ namespace LimeProxy.Tests.Proxy
             var t = new TableQuery() { };
             var name = "foo";
             var xml = "not xml";
+            var db = "some_db";
             A.CallTo(() => xmlBuilder.BuildQueryXml(name, t)).Returns(xml);
 
-            proxy.QueryTable(name, t);
+            proxy.QueryTable(db, name, t);
 
-            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(xml)).MustHaveHappened();
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(db, xml)).MustHaveHappened();
         }
 
         [Test]
@@ -131,10 +133,10 @@ namespace LimeProxy.Tests.Proxy
         {
             var t = new TableQuery() { };
             var name = "foo";
-            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._)).
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._, A<string>._)).
                Returns(@"<?xml version=""1.0"" encoding=""UTF-16"" ?><data />");
 
-            var result = proxy.QueryTable(name, t);
+            var result = proxy.QueryTable(A.Dummy<string>(), name, t);
 
             Assert.That(result.Success, Is.True);
         }
@@ -145,9 +147,9 @@ namespace LimeProxy.Tests.Proxy
             var t = new TableQuery() { };
             var name = "foo";
 
-            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._)).Throws<Exception>();
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._, A<string>._)).Throws<Exception>();
 
-            var result = proxy.QueryTable(name, t);
+            var result = proxy.QueryTable(A.Dummy<string>(), name, t);
 
             Assert.That(result.Success, Is.False);
         }
@@ -158,9 +160,9 @@ namespace LimeProxy.Tests.Proxy
             var t = new TableQuery() { };
             var name = "foo";
 
-            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._)).Throws<Exception>();
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._, A<string>._)).Throws<Exception>();
 
-            var result = proxy.QueryTable(name, t);
+            var result = proxy.QueryTable(A.Dummy<string>(), name, t);
 
             Assert.That(result.Data, Is.Not.Empty);
         }
@@ -170,13 +172,13 @@ namespace LimeProxy.Tests.Proxy
         {
             var t = new TableQuery() { };
             var name = "foo";
-            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._)).
+            A.CallTo(() => limeWebSerivceClientInvoker.QueryTable(A<string>._, A<string>._)).
                 Returns(@"<?xml version=""1.0"" encoding=""UTF-16"" ?>
 <data>
 	<person name=""Karl Kula"" email=""karl.kula@fakeorg.se"" phone=""08-123 123""/>
 </data>");
 
-            var result = proxy.QueryTable(name, t);
+            var result = proxy.QueryTable(A.Dummy<string>(), name, t);
 
             Assert.That(result.Data, Is.StringStarting("{\"person\":"));
         }

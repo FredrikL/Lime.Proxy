@@ -11,24 +11,24 @@ namespace LimeProxy.Modules
         {
             Get["/Echo/{data}"] = x => Response.AsText((string)x.data);
 
-            Options["/table/{name}"] = AddCorsHeadersForOptionsRequest;
-            Options["/sp/{name}"] = AddCorsHeadersForOptionsRequest;
+            Options["/{db}/table/{name}"] = AddCorsHeadersForOptionsRequest;
+            Options["/{db}/sp/{name}"] = AddCorsHeadersForOptionsRequest;
             
-            Post["/sp/{name}"] = x =>
+            Post["/{db}/sp/{name}"] = x =>
             {
                 var param = this.Bind<ProcedureParameters>();
-                Result result = limeWebServiceProxy.ExecuteStoredProcedure(x.name, param);
-
+                Result result = limeWebServiceProxy.ExecuteStoredProcedure(x.db, x.name, param);
+                
                 if(result.Success)
                     return Response.AsJson(result.Data);
 
                 return Response.AsJson(result.Data, HttpStatusCode.InternalServerError);
             };
 
-            Post["/table/{name}"] = x =>
+            Post["/{db}/table/{name}"] = x =>
             {
                 var param = this.Bind<TableQuery>();
-                Result result = limeWebServiceProxy.QueryTable(x.name, param);
+                Result result = limeWebServiceProxy.QueryTable(x.db, x.name, param);
 
                 if (result.Success)
                     return Response.AsJson(result.Data);

@@ -4,15 +4,29 @@ namespace LimeProxy.Proxy
 {
     public class LimeWebServiceClientInvoker : ILimeWebSerivceClientInvoker
     {
-        public string ExecuteProcedure(string xml)
+        private readonly IEndpointAddressProvider _endpointAddressProvider;
+
+        public LimeWebServiceClientInvoker(IEndpointAddressProvider endpointAddressProvider)
         {
-            var client = new DataServiceClient();
+            _endpointAddressProvider = endpointAddressProvider;
+        }
+
+        public string ExecuteProcedure(string db, string xml)
+        {
+            var client = GetDataServiceClient(db);
             return client.ExecuteProcedure(ref xml, false);
         }
 
-        public string QueryTable(string xml)
+        private DataServiceClient GetDataServiceClient(string db)
         {
             var client = new DataServiceClient();
+            client.Endpoint.Address = _endpointAddressProvider.GetUrlForDataBase(db);
+            return client;
+        }
+
+        public string QueryTable(string db, string xml)
+        {
+            var client = GetDataServiceClient(db);
             return client.GetXmlQueryData(xml);
         }
     }

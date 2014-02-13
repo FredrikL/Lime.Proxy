@@ -2,7 +2,7 @@
 {
     public interface ILimeWebSerivceClientInvoker
     {
-        string ExecuteProcedure(string xml);
-        string QueryTable(string xml);
+        string ExecuteProcedure(string db, string xml);
+        string QueryTable(string db, string xml);
     }
 }

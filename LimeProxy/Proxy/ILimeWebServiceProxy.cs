@@ -9,8 +9,8 @@ namespace LimeProxy.Proxy
 {
     public interface ILimeWebServiceProxy
     {
-        Result ExecuteStoredProcedure(string name, ProcedureParameters parameters);
-        Result QueryTable(string name, TableQuery parameters);
+        Result ExecuteStoredProcedure(string db, string name, ProcedureParameters parameters);
+        Result QueryTable(string db, string name, TableQuery parameters);
     }
 
     public class LimeWebServiceProxy : ILimeWebServiceProxy
@@ -25,12 +25,12 @@ namespace LimeProxy.Proxy
             _xmlBuilder = xmlBuilder;
         }
 
-        public Result ExecuteStoredProcedure(string name, ProcedureParameters parameters)
+        public Result ExecuteStoredProcedure(string db, string name, ProcedureParameters parameters)
         {
             try
             {
                 var xml = _xmlBuilder.BuildProcedureXml(name, parameters);
-                var result = _limeWebSerivceClientInvoker.ExecuteProcedure(xml);
+                var result = _limeWebSerivceClientInvoker.ExecuteProcedure(db, xml);
                 var json = ConvertFromXmlStringToJsonString(result);
                 return new Result()
                 {
@@ -48,12 +48,12 @@ namespace LimeProxy.Proxy
             }
         }
 
-        public Result QueryTable(string name, TableQuery parameters)
+        public Result QueryTable(string db, string name, TableQuery parameters)
         {
             try
             {
                 var xml = _xmlBuilder.BuildQueryXml(name, parameters);
-                var result = _limeWebSerivceClientInvoker.QueryTable(xml);
+                var result = _limeWebSerivceClientInvoker.QueryTable(db, xml);
                 var json = ConvertFromXmlStringToJsonString(result);
                 return new Result()
                 {

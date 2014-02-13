@@ -21,8 +21,8 @@ namespace LimeProxy.Tests.Modules
             limeWebServiceProxy = A.Fake<ILimeWebServiceProxy>();
         }
 
-        [TestCase("/v1/sp/foo")]
-        [TestCase("/v1/table/bar")]
+        [TestCase("/v1/bar/sp/foo")]
+        [TestCase("/v1/foo/table/bar")]
         public void ShouldSetCORSHeaderInResponse(string url)
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
@@ -39,18 +39,18 @@ namespace LimeProxy.Tests.Modules
         }
 
         [Test]
-        public void ShouldPickSpToExecuteFromUrl()
+        public void ShouldPickDbAndSpToExecuteFromUrl()
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
 
-            var result = browser.Post("/v1/sp/some_sp", with =>
+            var result = browser.Post("/v1/some_db/sp/some_sp", with =>
             {
                 with.HttpRequest();
                 with.Header("accept", "application/json");
                 with.Header("Content-Type", "application/json");
             });
 
-            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("some_sp", A<ProcedureParameters>._)).MustHaveHappened();
+            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("some_db","some_sp", A<ProcedureParameters>._)).MustHaveHappened();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace LimeProxy.Tests.Modules
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
 
-            var result = browser.Post("/v1/sp/some_sp", with =>
+            var result = browser.Post("/v1/some_db/sp/some_sp", with =>
             {
                 with.HttpRequest();
                 with.Header("accept", "application/json");
@@ -68,23 +68,23 @@ namespace LimeProxy.Tests.Modules
 }");
             });
 
-            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure(A<string>._, 
+            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure(A<string>._, A<string>._, 
                 A<ProcedureParameters>.That.Matches(p => p.Parameters.First().Name == "foo"))).MustHaveHappened();
         }
 
         [Test]
-        public void ShouldPickTableToQueryFromUrl()
+        public void ShouldPickDbAndTableToQueryFromUrl()
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
 
-            var result = browser.Post("/v1/table/customer", with =>
+            var result = browser.Post("/v1/foo/table/customer", with =>
             {
                 with.HttpRequest();
                 with.Header("accept", "application/json");
                 with.Header("Content-Type", "application/json");
             });
 
-            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>._)).MustHaveHappened();
+            A.CallTo(() => limeWebServiceProxy.QueryTable("foo","customer", A<TableQuery>._)).MustHaveHappened();
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace LimeProxy.Tests.Modules
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
 
-            var result = browser.Post("/v1/table/customer", with =>
+            var result = browser.Post("/v1/foo/table/customer", with =>
             {
                 with.HttpRequest();
                 with.Header("accept", "application/json");
@@ -110,11 +110,11 @@ namespace LimeProxy.Tests.Modules
                 return true;
             };
 
-            A.CallTo(() => limeWebServiceProxy.QueryTable("customer", A<TableQuery>.That.Matches(matcher, ""))).MustHaveHappened();
+            A.CallTo(() => limeWebServiceProxy.QueryTable(A<string>._, A<string>._, A<TableQuery>.That.Matches(matcher, ""))).MustHaveHappened();
         }
 
-        [TestCase("/v1/table/customer")]
-        [TestCase("/v1/sp/csp_some_sp")]
+        [TestCase("/v1/db/table/customer")]
+        [TestCase("/v1/db/sp/csp_some_sp")]
         public void ShouldReturnsNeededCorsHeadersForOptionsMethod(string url)
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
@@ -135,9 +135,9 @@ namespace LimeProxy.Tests.Modules
         public void ShouldSetStatusCodeTo500IfErrorOccuredForStoredProcedure()
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
-            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("some_sp", A<ProcedureParameters>._))
+            A.CallTo(() => limeWebServiceProxy.ExecuteStoredProcedure("db","some_sp", A<ProcedureParameters>._))
                 .Returns(new Result() { Success = false });
-            var result = browser.Post("/v1/sp/some_sp", with =>
+            var result = browser.Post("/v1/db/sp/some_sp", with =>
             {
                 with.HttpRequest();
                 with.Header("accept", "application/json");
@@ -151,9 +151,9 @@ namespace LimeProxy.Tests.Modules
         public void ShouldSetStatusCodeTo500IfErrorOccuredForTable()
         {
             var browser = new Browser(w => w.Module(new ProxyModule(limeWebServiceProxy)));
-            A.CallTo(() => limeWebServiceProxy.QueryTable("foo", A<TableQuery>._))
+            A.CallTo(() => limeWebServiceProxy.QueryTable("bar","foo", A<TableQuery>._))
                 .Returns(new Result() { Success = false });
-            var result = browser.Post("/v1/table/foo", with =>
+            var result = browser.Post("/v1/bar/table/foo", with =>
             {
                 with.HttpRequest();
                 with.Header("accept", "application/json");
