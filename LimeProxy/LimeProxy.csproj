@@ -71,7 +71,9 @@
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\TableQuery.cs" />
     <Compile Include="Modules\ProxyModule.cs" />
+    <Compile Include="Proxy\IConfigurationManagerWrapper.cs" />
     <Compile Include="Proxy\IEndpointAddressProvider.cs" />
+    <Compile Include="Proxy\ILimeConfigLookup.cs" />
     <Compile Include="Proxy\ILimeWebSerivceClientInvoker.cs" />
     <Compile Include="Proxy\ILimeWebServiceProxy.cs" />
     <Compile Include="Builders\IXmlBuilder.cs" />

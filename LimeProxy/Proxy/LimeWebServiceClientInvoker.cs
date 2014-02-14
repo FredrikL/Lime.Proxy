@@ -20,7 +20,7 @@ namespace LimeProxy.Proxy
         private DataServiceClient GetDataServiceClient(string db)
         {
             var client = new DataServiceClient();
-            client.Endpoint.Address = _endpointAddressProvider.GetUrlForDataBase(db);
+            client.Endpoint.Address = _endpointAddressProvider.GetEndpointAddressForDataBase(db);
             return client;
         }
 
