@@ -1,6 +1,6 @@
 <html>
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="jquery-1.9.1.min.js"></script>
 </head>
 <body>
 	Hai
@@ -32,7 +32,7 @@
 			}),
                     dataType: 'json',
                     type: 'POST',
-                    url: 'http://localhost:8000/v1/table/coworker',
+                    url: 'http://localhost:8000/v1/ith/table/coworker',
 			crossDomain: true
 		}).done(function( data ) {
 			console.log(data);
@@ -48,7 +48,7 @@
                     data: JSON.stringify({ }),
                     dataType: 'json',
                     type: 'POST',
-                    url: 'http://localhost:8000/v1/sp/csp_gethelpdeskstatistics',
+                    url: 'http://localhost:8000/v1/ith/sp/csp_gethelpdeskstatistics',
 			crossDomain: true
 		}).done(function( data ) {
 			console.log(data);
